@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tafl_games
+namespace Tafl_games.api
 {
     /* This interface models a Caretaker, which is part of the memento pattern.
      The Caretaker stores trace of any relevant data such as turn number, positions
