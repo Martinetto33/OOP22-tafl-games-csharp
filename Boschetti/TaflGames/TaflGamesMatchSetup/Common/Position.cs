@@ -3,8 +3,8 @@
     /// <summary>
     /// This class models a position on the board.
     /// </summary>
-	public class Position : IPosition
-	{
+    public class Position : IPosition
+    {
         public int X { get; }
         public int Y { get; }
 
@@ -14,10 +14,10 @@
         /// <param name="x">the row</param>
         /// <param name="y">the column</param>
         public Position(int x, int y)
-		{
-			X = x;
-			Y = y;
-		}
+        {
+            X = x;
+            Y = y;
+        }
 
         /// <summary>
         /// Creates a copy of the position passed as parameter.
