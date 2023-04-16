@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,20 +40,33 @@ namespace Tafl_games.code
             _history = new Stack<IMatchMemento>();
             _locked = false;
         }
+        public void UpdateHistory()
+        {
+            if (_history.Count > 0)
+            {
+                _history.Clear();
+            }
+            _history.Push(_originator.Save());
+            _locked = true;
+        }
+
+        public void Undo()
+        {
+            if (_history.Count == 0)
+            {
+                return;
+            } else if (_locked) 
+            {
+                throw new InvalidOperationException("History is locked!");
+            }
+            _originator.Restore(_history.Pop());
+            this.UpdateHistory();
+        }
 
         /// <inheritdoc/>
         public bool IsLocked() => _locked;
 
-        public void Undo()
-        {
-            throw new NotImplementedException();
-        }
-
         public void UnlockHistory() => _locked = false;
 
-        public void UpdateHistory()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

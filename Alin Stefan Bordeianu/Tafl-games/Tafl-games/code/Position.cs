@@ -16,5 +16,17 @@ namespace Tafl_games.code
             XPosition = xPosition;
             YPosition = yPosition;
         }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Position position &&
+                   XPosition == position.XPosition &&
+                   YPosition == position.YPosition;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(XPosition, YPosition);
+        }
     }
 }
