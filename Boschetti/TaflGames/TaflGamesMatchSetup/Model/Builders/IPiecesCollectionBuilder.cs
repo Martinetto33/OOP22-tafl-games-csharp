@@ -6,19 +6,19 @@ namespace Builders
     /// <summary>
     /// This interface allows to interact with a builder to create a collection of pieces.
     /// </summary>
-	public interface IPiecesCollectionBuilder
-	{
+    public interface IPiecesCollectionBuilder
+    {
         /// <summary>
         /// Adds the king piece to the pieces collection being built.
         /// </summary>
         /// <param name="position">the position where the king must be placed</param>
-		void AddKing(IPosition position);
-
+        void AddKing(IPosition position);
+        
         /// <summary>
         /// Adds the queen pieces to the pieces collection being built.
         /// </summary>
         /// <param name="positions">the position where the queens must be placed</param>
-		void AddQueens(IDictionary<Player, ISet<IPosition>> positions);
+        void AddQueens(IDictionary<Player, ISet<IPosition>> positions);
 
         /// <summary>
         /// Adds the archer pieces to the pieces collection being built.

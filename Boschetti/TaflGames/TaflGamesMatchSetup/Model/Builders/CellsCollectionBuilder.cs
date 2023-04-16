@@ -6,15 +6,15 @@ namespace Builders
     /// <summary>
     /// This class implements a builder to create a collection of cells.
     /// </summary>
-	public class CellsCollectionBuilder : ICellsCollectionBuilder
-	{
-		private readonly IDictionary<IPosition, ICell> _cells;
-		private int _boardSize;
+    public class CellsCollectionBuilder : ICellsCollectionBuilder
+    {
+        private readonly IDictionary<IPosition, ICell> _cells;
+        private int _boardSize;
 
         /// <summary>
         /// Creates a new builder for a collection of cells.
         /// </summary>
-		public CellsCollectionBuilder() => _cells = new Dictionary<IPosition, ICell>();
+        public CellsCollectionBuilder() => _cells = new Dictionary<IPosition, ICell>();
 
         public void AddBoardSize(int boardSize) => _boardSize = boardSize;
 

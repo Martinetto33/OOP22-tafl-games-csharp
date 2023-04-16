@@ -40,14 +40,6 @@ namespace Builders
             }
         }
 
-        public void AddBasicPieces(IDictionary<Player, ISet<IPosition>> positions)
-        {
-            foreach (var (player, playerPositions) in positions)
-            {
-                playerPositions.ToList().ForEach(pos => _pieces[player].Add(pos, new BasicPiece()));
-            }
-        }
-
         public void AddShields(IDictionary<Player, ISet<IPosition>> positions)
         {
             foreach (var (player, playerPositions) in positions)
@@ -61,6 +53,14 @@ namespace Builders
             foreach (var (player, playerPositions) in positions)
             {
                 playerPositions.ToList().ForEach(pos => _pieces[player].Add(pos, new Swapper()));
+            }
+        }
+
+        public void AddBasicPieces(IDictionary<Player, ISet<IPosition>> positions)
+        {
+            foreach (var (player, playerPositions) in positions)
+            {
+                playerPositions.ToList().ForEach(pos => _pieces[player].Add(pos, new BasicPiece()));
             }
         }
 
