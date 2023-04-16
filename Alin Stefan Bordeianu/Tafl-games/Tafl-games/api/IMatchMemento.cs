@@ -22,5 +22,11 @@ namespace Tafl_games.api
         /// the turn number of the snapshot of the match stored by this MatchMemento.
         /// </returns>
         int GetTurnNumber();
+
+        string GetActivePlayer();
+
+        IBoardMemento GetBoardMemento();
+
+
     }
 }

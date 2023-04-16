@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Tafl_games.code;
 
 namespace Tafl_games.api
 {
@@ -24,5 +25,9 @@ namespace Tafl_games.api
         /// classes which shouldn't bother with these associations.
         /// </summary>
         void Restore();
+
+        Position GetPosition();
+
+        int GetNumberOfLives();
     }
 }
