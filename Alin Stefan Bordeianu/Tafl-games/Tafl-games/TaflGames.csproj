@@ -3,9 +3,13 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>Tafl_games</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <RootNamespace>Tafl-games</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="code\" />
+  </ItemGroup>
 
 </Project>

@@ -42,7 +42,7 @@ namespace Tafl_games.api
         /// method cannot be called until the history is unlocked.
         /// </summary>
         /// <returns>
-        /// True if the history is locked.
+        /// true if the history is locked.
         /// </returns>
         bool IsLocked();
 
