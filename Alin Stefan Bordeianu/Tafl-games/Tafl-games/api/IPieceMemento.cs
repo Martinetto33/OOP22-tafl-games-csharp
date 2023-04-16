@@ -26,8 +26,20 @@ namespace Tafl_games.api
         /// </summary>
         void Restore();
 
+        /// <summary>
+        /// Returns the current Position of this Piece.
+        /// </summary>
+        /// <returns>
+        /// the <see cref="Position"/> of this Piece.
+        /// </returns>
         Position GetPosition();
 
+        /// <summary>
+        /// Returns the current number of lives of this Piece.
+        /// </summary>
+        /// <returns>
+        /// the current number of lives.
+        /// </returns>
         int GetNumberOfLives();
     }
 }

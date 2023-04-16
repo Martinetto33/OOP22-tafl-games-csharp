@@ -3,6 +3,9 @@ using Tafl_games.code;
 
 namespace MementoTests
 {
+    /// <summary>
+    /// Tests the Memento feature in a simplified context.
+    /// </summary>
     [TestClass]
     public class UnitTest1
     {
@@ -10,6 +13,11 @@ namespace MementoTests
         private BoardExample _board;
         private ICaretaker _caretaker;
 
+        /// <summary>
+        /// Initializes the fields. This method will be called
+        /// by all subsequent tests, in order to have fresh configurations
+        /// of the board and the match every time.
+        /// </summary>
         [TestInitialize()]
         public void Init()
         {
@@ -19,6 +27,10 @@ namespace MementoTests
             _caretaker.UpdateHistory();
         }
 
+        /// <summary>
+        /// A preliminary check that the normal movement and
+        /// piece killing function as expected.
+        /// </summary>
         [TestMethod]
         public void TestMovement()
         {
@@ -55,6 +67,9 @@ namespace MementoTests
 
         }
 
+        /// <summary>
+        /// Tests if the undo feature works correctly in the case of a simple movement.
+        /// </summary>
         [TestMethod]
         public void TestMovementUndo()
         {
@@ -90,6 +105,9 @@ namespace MementoTests
             Assert.AreEqual(1, _match.TurnNumber);
         }
 
+        /// <summary>
+        /// Tests if the undo can manage correctly dead pieces.
+        /// </summary>
         [TestMethod]
         public void TestEatingUndo()
         {

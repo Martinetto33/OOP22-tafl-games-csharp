@@ -6,11 +6,30 @@ using System.Threading.Tasks;
 
 namespace Tafl_games.code
 {
+    /// <summary>
+    /// A class modelling a 2D position.
+    /// </summary>
     public class Position
     {
+        /// <summary>
+        /// The X coordinate.
+        /// </summary>
         public int XPosition { get; }
+
+        /// <summary>
+        /// The Y coordinate.
+        /// </summary>
         public int YPosition { get; }
 
+        /// <summary>
+        /// Builds a new Position.
+        /// </summary>
+        /// <param name="xPosition">
+        /// the X coordinate.
+        /// </param>
+        /// <param name="yPosition">
+        /// the Y coordinate.
+        /// </param>
         public Position(int xPosition, int yPosition)
         {
             XPosition = xPosition;

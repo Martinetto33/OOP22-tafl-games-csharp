@@ -10,6 +10,9 @@ using System.Collections.ObjectModel;
 
 namespace Tafl_games.code
 {
+    /// <summary>
+    /// A class representing a Board.
+    /// </summary>
     public class BoardExample
     {
         private static readonly int SIZE = 11;
@@ -17,6 +20,10 @@ namespace Tafl_games.code
         public IDictionary<Position, CellExample> Cells { get; set; }
         public IDictionary<Position, PieceExample> Pieces { get; set; }
 
+        /// <summary>
+        /// Builds a new Board example, with a base configuration of pieces and cells.
+        /// Te disposition of the elements does not reflect the actual game rules.
+        /// </summary>
         public BoardExample() 
         {
             /* Creating a default board */
@@ -55,8 +62,12 @@ namespace Tafl_games.code
         /// <summary>
         /// A method used to move the pieces on the Board.
         /// </summary>
-        /// <param name="startPosition"></param>
-        /// <param name="endPosition"></param>
+        /// <param name="startPosition">
+        /// the starting <see cref="Position"/>.
+        /// </param>
+        /// <param name="endPosition">
+        /// the ending <see cref="Position"/>.
+        /// </param>
         public void Move(Position startPosition, Position endPosition)
         {
             bool isPresent = Pieces.TryGetValue(startPosition, out PieceExample? pieceToMove);
@@ -74,6 +85,12 @@ namespace Tafl_games.code
             }
         }
 
+        /// <summary>
+        /// A method used to attack and possibly kill pieces on the board.
+        /// </summary>
+        /// <param name="attackedPosition">
+        /// the <see cref="Position"/> where the attack occurred.
+        /// </param>
         public void Eat(Position attackedPosition)
         {
             Debug.Assert(Pieces.TryGetValue(attackedPosition, out PieceExample? pieceToKill));
@@ -96,6 +113,12 @@ namespace Tafl_games.code
             }
         }
 
+        /// <summary>
+        /// Saves the current state of the board.
+        /// </summary>
+        /// <returns>
+        /// a <see cref="IBoardMemento"/> describing the current state of this Board.
+        /// </returns>
         public IBoardMemento Save()
         {
             return new BoardMementoImpl(this,
@@ -103,22 +126,42 @@ namespace Tafl_games.code
                 Pieces.Values.Select(piece => piece.Save()).ToList());
         }
 
+        /// <summary>
+        /// A class modelling a memento for a Board.
+        /// </summary>
         public class BoardMementoImpl : IBoardMemento
         {
             private readonly BoardExample _parent;
             private IList<ICellMemento> CellsMemento { get; }
             private IList<IPieceMemento> PiecesMemento { get; }
 
+            /// <summary>
+            /// Builds a new BoardMementoImpl and ensures that Cells and Pieces Memento are stored
+            /// as well.
+            /// </summary>
+            /// <param name="parent">
+            /// a reference to the <see cref="BoardExample"/> that created this Memento.
+            /// </param>
+            /// <param name="cellsMemento">
+            /// a collection of <see cref="ICellMemento"/>.
+            /// </param>
+            /// <param name="piecesMemento">
+            /// a collection of <see cref="IPieceMemento"/>.
+            /// </param>
             public BoardMementoImpl(BoardExample parent, IList<ICellMemento> cellsMemento, IList<IPieceMemento> piecesMemento)
             {
                 _parent = parent;
                 CellsMemento = cellsMemento;
                 PiecesMemento = piecesMemento;
             }
+
+            /// <inheritdoc/>
             public IList<ICellMemento> GetCellsMemento() => new ReadOnlyCollection<ICellMemento>(CellsMemento);
 
+            /// <inheritdoc/>
             public IList<IPieceMemento> GetPiecesMemento() => new ReadOnlyCollection<IPieceMemento>(PiecesMemento);
-
+            
+            /// <inheritdoc/>
             public void Restore() => _parent.Restore(this);
         }
     }

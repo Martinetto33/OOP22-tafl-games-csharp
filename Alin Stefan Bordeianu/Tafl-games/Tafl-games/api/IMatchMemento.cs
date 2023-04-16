@@ -23,8 +23,21 @@ namespace Tafl_games.api
         /// </returns>
         int GetTurnNumber();
 
+        /// <summary>
+        /// Returns the current active player.
+        /// </summary>
+        /// <returns>
+        /// the name of the active player.
+        /// </returns>
         string GetActivePlayer();
 
+        /// <summary>
+        /// Returns the saved state of the Board.
+        /// </summary>
+        /// <returns>
+        /// a <see cref="IBoardMemento"/> describing the state of the board
+        /// implied in this Match.
+        /// </returns>
         IBoardMemento GetBoardMemento();
 
 

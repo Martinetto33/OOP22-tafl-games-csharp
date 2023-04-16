@@ -40,6 +40,8 @@ namespace Tafl_games.code
             _history = new Stack<IMatchMemento>();
             _locked = false;
         }
+
+        /// <inheritdoc/>
         public void UpdateHistory()
         {
             if (_history.Count > 0)
@@ -50,6 +52,7 @@ namespace Tafl_games.code
             _locked = true;
         }
 
+        /// <inheritdoc/>
         public void Undo()
         {
             if (_history.Count == 0)
@@ -66,6 +69,7 @@ namespace Tafl_games.code
         /// <inheritdoc/>
         public bool IsLocked() => _locked;
 
+        /// <inheritdoc/>
         public void UnlockHistory() => _locked = false;
 
     }
