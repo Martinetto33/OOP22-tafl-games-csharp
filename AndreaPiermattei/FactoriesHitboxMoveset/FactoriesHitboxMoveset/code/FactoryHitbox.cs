@@ -12,7 +12,7 @@ namespace FactoriesHitboxMoveset.code
     {
         ISet<Position> CreateBasicHitboxDistance(int distance)
         {
-            if (distance < 0)
+            if ( distance < 0 || distance is null )
             {
                 throw new ArgumentException("distance not valid");
             }
@@ -27,7 +27,7 @@ namespace FactoriesHitboxMoveset.code
 
         ISet<Position> CreateArcherHitbox(int range)
         {
-            if (range < 0)
+            if ( range < 0 || range is null )
             {
                 throw new ArgumentException("range not valid");
             }

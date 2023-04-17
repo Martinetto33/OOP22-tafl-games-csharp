@@ -22,8 +22,13 @@ namespace FactoriesHitboxMoveset.code
         }
         public ISet<Vector> CreateSwapperMoveSet(ISet<Position> enemyPositions)
         {
+            if (enemyPositions is null)
+            {
+                throw new ArgumentException("enemyPosition not valid");
+            }
             ISet<Position> s = new HashSet<>();
-            s.UnionWith(enemyPositions.Select(p => new Vector(new Position(0, 0), p, false)));
+            s.UnionWith(enemyPositions.Select( p => new Vector(new Position(0, 0), p, false) )
+                .ToHashSet);
             s.UnionWith(CreateBasicMoveSet());
             return s;
         }

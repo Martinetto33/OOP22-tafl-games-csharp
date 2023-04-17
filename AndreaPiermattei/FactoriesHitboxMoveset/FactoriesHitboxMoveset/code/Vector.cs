@@ -17,6 +17,7 @@ namespace FactoriesHitboxMoveset.code
         {
             StartPos = startPos;
             EndPos = endPos;
+            IsUnitVector = isUnitVector;
         }
 
         public override bool Equals(object? obj) => obj is Vector v &&
