@@ -16,7 +16,7 @@ namespace TaflGames.Test
         [Test]
         public void TestCanAccept()
         {
-            IPiece piece = new Piece(new Position(0,0), Player.ATTACKER);
+            IPieceMock piece = new PieceMock(new Position(0,0), Player.ATTACKER);
             Assert.True(_classicCell.CanAccept(piece));
         }
 

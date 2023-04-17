@@ -9,7 +9,7 @@ namespace TaflGames.Test
 
         private static Board _board;
         private static Dictionary<Position, ICell> _cells;
-        private static Dictionary<Player, Dictionary<Position, Piece>> _pieces;
+        private static Dictionary<Player, Dictionary<Position, PieceMock>> _pieces;
         private static Player p1 = Player.ATTACKER;
         private static Player p2 = Player.DEFENDER;
 
@@ -17,11 +17,11 @@ namespace TaflGames.Test
         public void Setup()
         {
             _cells = new Dictionary<Position, ICell>();
-            _pieces = new Dictionary<Player, Dictionary<Position, Piece>>();
-            Dictionary<Position, Piece> piecesPlayer1 = new();
-            Dictionary<Position, Piece> piecesPlayer2 = new();
-            piecesPlayer1.Add(new Position(0, 0), new Piece(new Position(0, 0), p1));
-            piecesPlayer2.Add(new Position(3, 3), new Piece(new Position(3, 3), p2));
+            _pieces = new Dictionary<Player, Dictionary<Position, PieceMock>>();
+            Dictionary<Position, PieceMock> piecesPlayer1 = new();
+            Dictionary<Position, PieceMock> piecesPlayer2 = new();
+            piecesPlayer1.Add(new Position(0, 0), new PieceMock(new Position(0, 0), p1));
+            piecesPlayer2.Add(new Position(3, 3), new PieceMock(new Position(3, 3), p2));
             _pieces.Add(p1, piecesPlayer1);
             _pieces.Add(p2, piecesPlayer2);
             for (int i = 0; i < BoardSize; i++)
@@ -77,8 +77,8 @@ namespace TaflGames.Test
 
         public void TestGetPieceAtPosition()
         {
-            Assert.That(_board.GetPieceAtPosition(new Position(0, 0)), Is.EqualTo(new Piece(new Position(0, 0), p1)));
-            Assert.That(_board.GetPieceAtPosition(new Position(3, 3)), Is.EqualTo(new Piece(new Position(3, 3), p2)));
+            Assert.That(_board.GetPieceAtPosition(new Position(0, 0)), Is.EqualTo(new PieceMock(new Position(0, 0), p1)));
+            Assert.That(_board.GetPieceAtPosition(new Position(3, 3)), Is.EqualTo(new PieceMock(new Position(3, 3), p2)));
             Assert.That(_board.GetPieceAtPosition(new Position(1, 1)), Is.EqualTo(null));
         }
 
@@ -87,7 +87,7 @@ namespace TaflGames.Test
         public void TestIsPathFree()
         {
             //adding a Piece in Position 1,3
-            _pieces[p2].Add(new Position(1, 3), new Piece(new Position(1, 3), p2));
+            _pieces[p2].Add(new Position(1, 3), new PieceMock(new Position(1, 3), p2));
             _cells[new Position(1, 3)].SetFree(false);
 
             Assert.True(_board.IsPathFree(new Position(3, 3), new Position(3, 0)));
