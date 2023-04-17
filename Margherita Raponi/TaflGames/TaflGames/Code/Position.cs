@@ -3,17 +3,27 @@ namespace TaflGames.Code
 {
     public class Position
     {
-        private readonly int _x;
-        private readonly int _y;
 
-        public Position(int x, int y)
+        public Position(int xPosition, int yPosition)
         {
-            _x = x;
-            _y = y;
+            XPosition = xPosition;
+            YPosition = yPosition;
         }
 
-        public int X { get { return _x; } }
+        public int XPosition { get; }
 
-        public int Y { get { return _y; } }
+        public int YPosition { get; }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Position position &&
+                   XPosition == position.XPosition &&
+                   YPosition == position.YPosition;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(XPosition, YPosition);
+        }
     }
 }

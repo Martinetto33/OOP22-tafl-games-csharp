@@ -6,9 +6,6 @@ namespace TaflGames.Code
 {
     internal interface IBoard
     {
-        bool isStartingPointValid(Position start, Player player);
-
-
-
+        bool IsStartingPointValid(Position start, Player player);
     }
 }

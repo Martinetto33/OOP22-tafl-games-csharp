@@ -17,7 +17,7 @@ namespace TaflGames.Code
 
         }
 
-        public bool isStartingPointValid(Position start, Player player)
+        public bool IsStartingPointValid(Position start, Player player)
         {
             if (_pieces[player].ContainsKey(start) && _pieces[player][start].IsAlive)
             {
@@ -29,31 +29,31 @@ namespace TaflGames.Code
             }
         }
 
-        private HashSet<Position> GetAdjacentPositions(Position currPos)
+        public HashSet<Position> GetAdjacentPositions(Position currPos)
         {
             HashSet<Position> setOfPosition = new()
             {
-                new Position(currPos.X + 1, currPos.Y),
-                new Position(currPos.X - 1, currPos.Y),
-                new Position(currPos.X, currPos.Y + 1),
-                new Position(currPos.X, currPos.Y - 1)
+                new Position(currPos.XPosition + 1, currPos.YPosition),
+                new Position(currPos.XPosition- 1, currPos.YPosition),
+                new Position(currPos.XPosition, currPos.YPosition + 1),
+                new Position(currPos.XPosition, currPos.YPosition - 1)
             };
-            return setOfPosition.Where(pos => pos.X >= 0 && pos.Y >= 0
-                                           && pos.X < _size && pos.Y < _size).ToHashSet();
+            return setOfPosition.Where(pos => pos.XPosition>= 0 && pos.YPosition >= 0
+                                           && pos.XPosition< _size && pos.YPosition < _size).ToHashSet();
         }
 
-        private Piece GetPieceAtPosition(Position pos) => _pieces.Where(x => x.Value.ContainsKey(pos)).Select(x => x.Value[pos]).FirstOrDefault();
+        public IPiece GetPieceAtPosition(Position pos) => _pieces.Where(x => x.Value.ContainsKey(pos)).Select(x => x.Value[pos]).FirstOrDefault();
 
 
-        private bool IsPathFree(Position start, Position dest)
+        public bool IsPathFree(Position start, Position dest)
         {
-            if (start.X == dest.X)
+            if (start.XPosition == dest.XPosition)
             {
-                if (start.Y < dest.Y)
+                if (start.YPosition < dest.YPosition)
                 {
-                    for (int i = start.Y + 1; i < dest.Y; i++)
+                    for (int i = start.YPosition + 1; i < dest.YPosition; i++)
                     {
-                        if (!_cells[new Position(start.X, i)].CanAccept(GetPieceAtPosition(start)))
+                        if (!_cells[new Position(start.XPosition, i)].CanAccept(GetPieceAtPosition(start)))
                         {
                             return false;
                         }
@@ -61,9 +61,9 @@ namespace TaflGames.Code
                 }
                 else
                 {
-                    for (int i = start.Y - 1; i > dest.Y; i--)
+                    for (int i = start.YPosition - 1; i > dest.YPosition; i--)
                     {
-                        if (!_cells[new Position(start.X, i)].CanAccept(GetPieceAtPosition(start)))
+                        if (!_cells[new Position(start.XPosition, i)].CanAccept(GetPieceAtPosition(start)))
                         {
                             return false;
                         }
@@ -72,11 +72,11 @@ namespace TaflGames.Code
             }
             else
             {
-                if (start.X < dest.X)
+                if (start.XPosition< dest.XPosition)
                 {
-                    for (int i = start.X + 1; i < dest.X; i++)
+                    for (int i = start.XPosition+ 1; i < dest.XPosition; i++)
                     {
-                        if (!_cells[new Position(i, start.Y)].CanAccept(GetPieceAtPosition(start)))
+                        if (!_cells[new Position(i, start.YPosition)].CanAccept(GetPieceAtPosition(start)))
                         {
                             return false;
                         }
@@ -84,9 +84,9 @@ namespace TaflGames.Code
                 }
                 else
                 {
-                    for (int i = start.X - 1; i > dest.X; i--)
+                    for (int i = start.XPosition- 1; i > dest.XPosition; i--)
                     {
-                        if (!_cells[new Position(i, start.Y)].CanAccept(GetPieceAtPosition(start)))
+                        if (!_cells[new Position(i, start.YPosition)].CanAccept(GetPieceAtPosition(start)))
                         {
                             return false;
                         }
