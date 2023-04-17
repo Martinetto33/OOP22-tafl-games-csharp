@@ -6,7 +6,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using FactoriesHitboxMoveset.api;
-using Tafl_games.code;
 
 namespace FactoriesHitboxMoveset.code
 {
