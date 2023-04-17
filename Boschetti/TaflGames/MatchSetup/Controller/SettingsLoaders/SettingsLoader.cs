@@ -5,6 +5,10 @@ using System.Xml.Linq;
 
 namespace SettingsLoaders
 {
+    /// <summary>
+    /// This class loads the settings for the setup of the board for each game mode
+    /// from configuration files.
+    /// </summary>
     public class SettingsLoader : ISettingsLoader
     {
         private const string ClassicModeConfigFile = "MatchSetup.Resources.Config.ClassicModeSettings.xml";
