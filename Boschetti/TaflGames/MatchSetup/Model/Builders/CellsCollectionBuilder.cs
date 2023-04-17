@@ -30,7 +30,7 @@ namespace Builders
             positions.ToList().ForEach(pos => _cells.Add(pos, new Slider()));
         }
 
-        public void AddBasicCells()
+        public void AddClassicCells()
         {
             foreach (int row in Enumerable.Range(0, _boardSize))
             {

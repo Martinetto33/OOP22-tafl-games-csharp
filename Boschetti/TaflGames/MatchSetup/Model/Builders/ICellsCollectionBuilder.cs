@@ -36,7 +36,7 @@ namespace Builders
         /// <summary>
         /// Adds the basic cells to the cells collection being built.
         /// </summary>
-        void AddBasicCells();
+        void AddClassicCells();
 
         /// <returns>the collection of cells that has been set up</returns>
         IDictionary<IPosition, ICell> Build();

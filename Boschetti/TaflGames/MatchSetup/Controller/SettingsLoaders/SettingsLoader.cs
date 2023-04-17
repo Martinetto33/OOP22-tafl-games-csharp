@@ -58,7 +58,7 @@ namespace SettingsLoaders
             cellsCollBuilder.AddExits(exitsPositions);
         }
 
-        private void LoadClassicCellsData(ICellsCollectionBuilder cellsCollBuilder) => cellsCollBuilder.AddBasicCells();
+        private void LoadClassicCellsData(ICellsCollectionBuilder cellsCollBuilder) => cellsCollBuilder.AddClassicCells();
 
         private void LoadBasicPiecesData(IPiecesCollectionBuilder piecesCollBuilder)
         {
