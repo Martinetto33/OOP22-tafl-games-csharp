@@ -36,7 +36,11 @@ namespace Builders
             {
                 foreach (int column in Enumerable.Range(0, _boardSize))
                 {
-                    _cells.Add(new Position(row, column), new ClassicCell());
+                    IPosition position = new Position(row, column);
+                    if (!_cells.ContainsKey(position))
+                    {
+                        _cells.Add(position, new ClassicCell());
+                    }
                 }
             }
         }
