@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaflGamesMatchSetup", "TaflGamesMatchSetup\TaflGamesMatchSetup.csproj", "{7B801D5A-975F-4FAB-A534-2EB93D0BB3B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MatchSetup", "MatchSetup\MatchSetup.csproj", "{7B801D5A-975F-4FAB-A534-2EB93D0BB3B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMatchSetup", "TestMatchSetup\TestMatchSetup.csproj", "{8E17231F-A350-42F9-B43B-BB3F4840EEB9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{7B801D5A-975F-4FAB-A534-2EB93D0BB3B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B801D5A-975F-4FAB-A534-2EB93D0BB3B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B801D5A-975F-4FAB-A534-2EB93D0BB3B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E17231F-A350-42F9-B43B-BB3F4840EEB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E17231F-A350-42F9-B43B-BB3F4840EEB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E17231F-A350-42F9-B43B-BB3F4840EEB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E17231F-A350-42F9-B43B-BB3F4840EEB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
