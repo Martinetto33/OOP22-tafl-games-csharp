@@ -1,14 +1,14 @@
 ﻿using Builders;
 using Common;
+using System.Reflection;
 using System.Xml.Linq;
 
-namespace SettingsLoader
+namespace SettingsLoaders
 {
     public class SettingsLoader : ISettingsLoader
     {
-        private const string ConfigFilesPath = "Resources/Config/";
-        private const string ClassicModeConfigFile = "ClassicModeSettings.xml";
-        private const string VariantModeConfigFile = "VariantModeSettings.xml";
+        private const string ClassicModeConfigFile = "MatchSetup.Resources.Config.ClassicModeSettings.xml";
+        private const string VariantModeConfigFile = "MatchSetup.Resources.Config.VariantModeSettings.xml";
 
         private XElement? _settings;
 
@@ -27,18 +27,12 @@ namespace SettingsLoader
             throw new NotImplementedException();
         }
 
-        private XElement LoadSettingsFromFile(string filename)
+        private XElement LoadSettingsFromFile(string resourceName)
         {
-            try
-            {
-                string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                string xmlConfigFileText = File.ReadAllText(baseDirectory + ConfigFilesPath + filename);
-                return XElement.Parse(xmlConfigFileText);
-            }
-            catch (Exception)
-            {
-                throw new IOException("An error occurred while trying to get or parse the configuration file.");
-            }
+            Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName);
+            StreamReader reader = new StreamReader(stream);
+            string xmlConfigFileText = reader.ReadToEnd();
+            return XElement.Parse(xmlConfigFileText);
         }
 
         private void LoadBoardSize(ICellsCollectionBuilder cellsCollBuilder)
@@ -76,7 +70,7 @@ namespace SettingsLoader
             return new Dictionary<Player, ISet<IPosition>>
                    {
                        { Player.Attacker, GetPositionsByTagName("Attacker" + piecesName + "Positions") },
-                       { Player.Attacker, GetPositionsByTagName("Defender" + piecesName + "Positions") }
+                       { Player.Defender, GetPositionsByTagName("Defender" + piecesName + "Positions") }
                    };
         }
 
