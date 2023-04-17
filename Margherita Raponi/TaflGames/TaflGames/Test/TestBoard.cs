@@ -3,6 +3,9 @@ using TaflGames.Code;
 
 namespace TaflGames.Test
 {
+    /// <summary>
+    /// test for Board
+    /// </summary>
     public class TestBoard
     {
         private const int BoardSize= 4;
@@ -13,6 +16,9 @@ namespace TaflGames.Test
         private static Player p1 = Player.ATTACKER;
         private static Player p2 = Player.DEFENDER;
 
+        /// <summary>
+        /// Initializes a board before each test.
+        /// </summary>
         [SetUp]
         public void Setup()
         {
@@ -37,6 +43,9 @@ namespace TaflGames.Test
             _board = new Board(_cells, _pieces, BoardSize);
         }
 
+        /// <summary>
+        /// Test the starting position of the player.
+        /// </summary>
         [Test]
         public void TestIsStartingPointValid()
         {
@@ -46,6 +55,9 @@ namespace TaflGames.Test
             Assert.False(_board.IsStartingPointValid(new Position(2, 2), p1));
         }
 
+        /// <summary>
+        /// Test the calculation of the adjacent positions.
+        /// </summary>
         [Test]
         public void TestGetAdjacentPositions()
         {
@@ -73,8 +85,10 @@ namespace TaflGames.Test
             Assert.That(_board.GetAdjacentPositions(new Position(1, 2)), Is.EquivalentTo(setOfPosition));
         }
 
+        /// <summary>
+        /// Test the finding of a Piece's type.
+        /// </summary>
         [Test]
-
         public void TestGetPieceAtPosition()
         {
             Assert.That(_board.GetPieceAtPosition(new Position(0, 0)), Is.EqualTo(new PieceMock(new Position(0, 0), p1)));
@@ -82,8 +96,10 @@ namespace TaflGames.Test
             Assert.That(_board.GetPieceAtPosition(new Position(1, 1)), Is.EqualTo(null));
         }
 
+        /// <summary>
+        /// Test the calculation that states if a path is free.
+        /// </summary>
         [Test]
-
         public void TestIsPathFree()
         {
             //adding a Piece in Position 1,3
@@ -93,9 +109,6 @@ namespace TaflGames.Test
             Assert.True(_board.IsPathFree(new Position(3, 3), new Position(3, 0)));
             Assert.False(_board.IsPathFree(new Position(3, 3), new Position(0, 3)));
             Assert.True(_board.IsPathFree(new Position(0, 0), new Position(0, 3)));
-
-
-
         }
     }
 }
