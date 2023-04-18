@@ -10,7 +10,7 @@ namespace TaflGames.Code
     public class Board : IBoard
     {
         private Dictionary<Position, ICell> _cells;
-        private Dictionary<Player, Dictionary<Position, PieceMock>> _pieces;
+        private Dictionary<Player, Dictionary<Position, IPieceMock>> _pieces;
         private readonly int _size;
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace TaflGames.Code
         /// <param name="size">
         /// the size of the board.
         /// </param>
-        public Board(Dictionary<Position, ICell> cells, Dictionary<Player, Dictionary<Position, PieceMock>> pieces, int size)
+        public Board(Dictionary<Position, ICell> cells, Dictionary<Player, Dictionary<Position, IPieceMock>> pieces, int size)
         {
             _cells = cells;
             _pieces = pieces;

@@ -12,7 +12,7 @@ namespace TaflGames.Test
 
         private static Board _board;
         private static Dictionary<Position, ICell> _cells;
-        private static Dictionary<Player, Dictionary<Position, PieceMock>> _pieces;
+        private static Dictionary<Player, Dictionary<Position, IPieceMock>> _pieces;
         private static Player p1 = Player.ATTACKER;
         private static Player p2 = Player.DEFENDER;
 
@@ -23,9 +23,9 @@ namespace TaflGames.Test
         public void Setup()
         {
             _cells = new Dictionary<Position, ICell>();
-            _pieces = new Dictionary<Player, Dictionary<Position, PieceMock>>();
-            Dictionary<Position, PieceMock> piecesPlayer1 = new();
-            Dictionary<Position, PieceMock> piecesPlayer2 = new();
+            _pieces = new Dictionary<Player, Dictionary<Position, IPieceMock>>();
+            Dictionary<Position, IPieceMock> piecesPlayer1 = new();
+            Dictionary<Position, IPieceMock> piecesPlayer2 = new();
             piecesPlayer1.Add(new Position(0, 0), new PieceMock(new Position(0, 0), p1));
             piecesPlayer2.Add(new Position(3, 3), new PieceMock(new Position(3, 3), p2));
             _pieces.Add(p1, piecesPlayer1);
