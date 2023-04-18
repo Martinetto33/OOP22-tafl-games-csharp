@@ -10,8 +10,8 @@ namespace FactoriesHitboxMoveset.api
 {
     public interface IFactoryHitbox
     {
-        ISet<Position> CreateBasicHitboxDistance(int distance);
-        ISet<Position> CreateBasicHitbox();
-        ISet<Position> CreateArcherHitbox();
+        public HashSet<Position> CreateBasicHitboxDistance(int distance);
+        public HashSet<Position> CreateBasicHitbox();
+        public HashSet<Position> CreateArcherHitbox(int range);
     }
 }

@@ -11,7 +11,7 @@ namespace FactoriesHitboxMoveset.api
 {
     public interface IFactoryMoveset
     {
-        ISet<Vector> CreateBasicMoveSet();
-        ISet<Vector> CreateSwapperMoveSet(ISet<Position> enemyPositions);
+        public HashSet<Vector> CreateBasicMoveSet();
+        public HashSet<Vector> CreateSwapperMoveSet(HashSet<Position> enemyPositions);
     }
 }

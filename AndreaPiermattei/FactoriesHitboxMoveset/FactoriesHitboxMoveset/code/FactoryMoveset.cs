@@ -11,24 +11,24 @@ namespace FactoriesHitboxMoveset.code
 {
     public class FactoryMoveset : IFactoryMoveset
     {
-        public ISet<Vector> CreateBasicMoveSet()
+        public HashSet<Vector> CreateBasicMoveSet()
         {
-            ISet<Vector> s = new HashSet<>();
-            s.Add(new Vector(1, 0, true));
-            s.Add(new Vector(0, 1, true));
-            s.Add(new Vector(-1, 0, true));
-            s.Add(new Vector(0, -1, true));
+            HashSet<Vector> s = new();
+            s.Add(new Vector(new Position(0, 0), new Position(1,0), true));
+            s.Add(new Vector(new Position(0, 0), new Position(0, 1), true));
+            s.Add(new Vector(new Position(0, 0), new Position(-1, 0), true));
+            s.Add(new Vector(new Position(0, 0), new Position(0, -1), true));
             return s;
         }
-        public ISet<Vector> CreateSwapperMoveSet(ISet<Position> enemyPositions)
+        public HashSet<Vector> CreateSwapperMoveSet(HashSet<Position> enemyPositions)
         {
             if (enemyPositions is null)
             {
                 throw new ArgumentException("enemyPosition not valid");
             }
-            ISet<Position> s = new HashSet<>();
-            s.UnionWith(enemyPositions.Select( p => new Vector(new Position(0, 0), p, false) )
-                .ToHashSet);
+            HashSet<Vector> s = new();
+            s.UnionWith(enemyPositions.Select(p => new Vector(new Position(0, 0), p, false))
+                .ToHashSet());
             s.UnionWith(CreateBasicMoveSet());
             return s;
         }

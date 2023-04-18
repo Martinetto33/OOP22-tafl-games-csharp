@@ -10,28 +10,31 @@ namespace FactoriesHitboxMoveset.code
 {
     public class FactoryHitbox : IFactoryHitbox
     {
-        ISet<Position> CreateBasicHitboxDistance(int distance)
+        public HashSet<Position> CreateBasicHitboxDistance(int distance)
         {
-            if ( distance < 0 || distance is null )
+            if ( distance < 0 )
             {
                 throw new ArgumentException("distance not valid");
             }
-            ISet<Position> s = new HashSet<>();
+            HashSet<Position> s = new();
             s.Add(new Position(distance, 0));
             s.Add(new Position(-distance, 0));
             s.Add(new Position(0, distance));
             s.Add(new Position(0, -distance));
             return s;
         }
-        ISet<Position> CreateBasicHitbox() => CreateBasicHitboxDistance(1);
-
-        ISet<Position> CreateArcherHitbox(int range)
+        public HashSet<Position> CreateBasicHitbox() 
         {
-            if ( range < 0 || range is null )
+            return CreateBasicHitboxDistance(1);
+        }
+
+        public HashSet<Position> CreateArcherHitbox(int range)
+        {
+            if ( range < 0 )
             {
                 throw new ArgumentException("range not valid");
             }
-            ISet<Position> f = new HashSet<>();
+            HashSet<Position> f = new();
             for (int i = 1;  i <= range; i++) 
             { 
                 f.UnionWith(CreateBasicHitboxDistance(i));
