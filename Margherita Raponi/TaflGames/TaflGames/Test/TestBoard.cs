@@ -8,7 +8,7 @@ namespace TaflGames.Test
     /// </summary>
     public class TestBoard
     {
-        private const int BoardSize= 4;
+        private const int BoardSize = 4;
 
         private static Board _board;
         private static Dictionary<Position, ICell> _cells;
