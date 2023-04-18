@@ -1,6 +1,9 @@
+using Common;
 using Builders;
 using NUnit.Framework.Internal;
 using SettingsLoaders;
+using Pieces;
+using System.Collections.Immutable;
 
 namespace TaflGames.TestMatchSetup
 {
@@ -34,6 +37,98 @@ namespace TaflGames.TestMatchSetup
                 Assert.Fail("Error: could not read configuration file. " + ex.ToString());
             }
 
+            var cells = _cellsCollBuilder.Build();
+            var pieces = _piecesCollBuilder.Build();
+
+            // Check king and throne correct placement
+            Assert.That(
+                pieces[Player.Defender][new Position(5, 5)].GetType(),
+                Is.EqualTo(typeof(Pieces.King))
+            );
+            Assert.That(
+                cells[new Position(5, 5)].GetType(),
+                Is.EqualTo(typeof(Cells.Throne))
+            );
+
+            // Check exits correct placement
+            Assert.That(
+                GetPositions(cells, typeof(Cells.Exit)),
+                Is.EqualTo(
+                    new HashSet<IPosition>()
+                    {
+                        new Position(0, 0),
+                        new Position(0, 10),
+                        new Position(10, 0),
+                        new Position(10, 10)
+                    }
+                )
+            );
+
+            // Check attacker basic pieces correct placement
+            Assert.That(
+                GetPositions(pieces[Player.Attacker], typeof(Pieces.BasicPiece)),
+                Is.EqualTo(
+                    new HashSet<IPosition>()
+                    {
+                        new Position(0, 3),
+                        new Position(0, 4),
+                        new Position(0, 5),
+                        new Position(0, 6),
+                        new Position(0, 7),
+                        new Position(1, 5),
+                        new Position(3, 0),
+                        new Position(4, 0),
+                        new Position(5, 0),
+                        new Position(6, 0),
+                        new Position(7, 0),
+                        new Position(5, 1),
+                        new Position(5, 9),
+                        new Position(3, 10),
+                        new Position(4, 10),
+                        new Position(5, 10),
+                        new Position(6, 10),
+                        new Position(7, 10),
+                        new Position(9, 5),
+                        new Position(10, 3),
+                        new Position(10, 4),
+                        new Position(10, 5),
+                        new Position(10, 6),
+                        new Position(10, 7)
+                    }
+                )
+            );
+
+            // Check defender basic pieces correct placement
+            Assert.That(
+                GetPositions(pieces[Player.Defender], typeof(Pieces.BasicPiece)),
+                Is.EqualTo(
+                    new HashSet<IPosition>()
+                    {
+                        new Position(3, 5),
+                        new Position(4, 4),
+                        new Position(4, 5),
+                        new Position(4, 6),
+                        new Position(5, 3),
+                        new Position(5, 4),
+                        new Position(5, 6),
+                        new Position(5, 7),
+                        new Position(6, 4),
+                        new Position(6, 5),
+                        new Position(6, 6),
+                        new Position(7, 5)
+                    }
+                )
+            );
+        }
+
+        private ISet<IPosition> GetPositions<T1, T2>(IDictionary<IPosition, T1> map, T2 targetType)
+        {
+            return map.AsQueryable()
+                    // filter out the objects that are not instances of the target class
+                    .Where(entry => entry.Value.GetType().Equals(targetType))
+                    // get the positions of objects that are instances of the target class
+                    .Select(entry => entry.Key)
+                    .ToHashSet();
         }
     }
 }
