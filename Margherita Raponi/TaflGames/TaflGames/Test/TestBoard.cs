@@ -22,8 +22,8 @@ namespace TaflGames.Test
         [SetUp]
         public void Setup()
         {
-            _cells = new Dictionary<Position, ICell>();
-            _pieces = new Dictionary<Player, Dictionary<Position, IPieceMock>>();
+            _cells = new();
+            _pieces = new();
             Dictionary<Position, IPieceMock> piecesPlayer1 = new();
             Dictionary<Position, IPieceMock> piecesPlayer2 = new();
             piecesPlayer1.Add(new Position(0, 0), new PieceMock(new Position(0, 0), p1));
