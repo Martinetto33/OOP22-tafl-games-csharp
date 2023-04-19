@@ -5,9 +5,6 @@
     /// </summary>
     public class Position : IPosition
     {
-        public int X { get; }
-        public int Y { get; }
-
         /// <summary>
         /// Creates a new couple of coordinates given a row and a column as parameters.
         /// </summary>
@@ -28,6 +25,9 @@
             X = position.X;
             Y = position.Y;
         }
+
+        public int X { get; }
+        public int Y { get; }
 
         public override bool Equals(object? obj)
         {
