@@ -18,6 +18,10 @@ namespace SettingsLoaders
 
         public void LoadClassicModeConfig(ICellsCollectionBuilder cellsCollBuilder, IPiecesCollectionBuilder piecesCollBuilder)
         {
+            if (cellsCollBuilder is null || piecesCollBuilder is null)
+            {
+                throw new ArgumentNullException("The builders passed as arguments cannot be null.");
+            }
             _settings = LoadSettingsFromFile(ClassicModeConfigFile);
             LoadBoardSize(cellsCollBuilder);
             LoadKingAndThroneData(cellsCollBuilder, piecesCollBuilder);
@@ -28,6 +32,10 @@ namespace SettingsLoaders
 
         public void LoadVariantModeConfig(ICellsCollectionBuilder cellsCollBuilder, IPiecesCollectionBuilder piecesCollBuilder)
         {
+            if (cellsCollBuilder is null || piecesCollBuilder is null)
+            {
+                throw new ArgumentNullException("The builders passed as arguments cannot be null.");
+            }
             _settings = LoadSettingsFromFile(VariantModeConfigFile);
             LoadBoardSize(cellsCollBuilder);
             LoadKingAndThroneData(cellsCollBuilder, piecesCollBuilder);
@@ -46,7 +54,7 @@ namespace SettingsLoaders
             try
             {
                 Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName);
-                StreamReader reader = new StreamReader(stream);
+                StreamReader reader = new(stream);
                 string xmlConfigFileText = reader.ReadToEnd();
                 return XElement.Parse(xmlConfigFileText);
             }
