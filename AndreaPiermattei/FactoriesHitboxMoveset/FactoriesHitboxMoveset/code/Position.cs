@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FactoriesHitboxMoveset.code
 {
-    /// <summary>
+    /// <summary> by Alin 
     /// A class modelling a 2D position.
     /// </summary>
     public class Position

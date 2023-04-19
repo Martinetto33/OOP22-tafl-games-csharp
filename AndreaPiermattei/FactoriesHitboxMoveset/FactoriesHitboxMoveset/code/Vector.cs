@@ -19,14 +19,17 @@ namespace FactoriesHitboxMoveset.code
             EndPos = endPos;
             IsUnitVector = isUnitVector;
         }
-
-        public override bool Equals(object? obj) => obj is Vector v &&
-                StartPos == v.StartPos &&
-                EndPos == v.EndPos;
-        public override int GetHashCode() => HashCode.Combine(StartPos,
-                                                              EndPos,
-                                                              IsUnitVector);
-
+        public override bool Equals(object? obj)
+        {
+            return obj is Vector
+                && StartPos.Equals(((Vector)obj).StartPos)
+                && EndPos.Equals(((Vector)obj).EndPos)
+                && IsUnitVector == ((Vector)obj).IsUnitVector;
+        }
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(StartPos, EndPos, IsUnitVector);
+        }
     }
 }
 

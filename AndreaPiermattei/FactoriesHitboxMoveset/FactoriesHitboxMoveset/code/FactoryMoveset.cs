@@ -13,12 +13,14 @@ namespace FactoriesHitboxMoveset.code
     {
         public HashSet<Vector> CreateBasicMoveSet()
         {
-            HashSet<Vector> s = new();
-            s.Add(new Vector(new Position(0, 0), new Position(1,0), true));
-            s.Add(new Vector(new Position(0, 0), new Position(0, 1), true));
-            s.Add(new Vector(new Position(0, 0), new Position(-1, 0), true));
-            s.Add(new Vector(new Position(0, 0), new Position(0, -1), true));
-            return s;
+            HashSet<Vector> s = new()
+            {
+                new Vector(new Position(0, 0), new Position(1, 0), true),
+                new Vector(new Position(0, 0), new Position(0, 1), true),
+                new Vector(new Position(0, 0), new Position(-1, 0), true),
+                new Vector(new Position(0, 0), new Position(0, -1), true)
+            };
+            return s.ToHashSet();
         }
         public HashSet<Vector> CreateSwapperMoveSet(HashSet<Position> enemyPositions)
         {
@@ -27,9 +29,9 @@ namespace FactoriesHitboxMoveset.code
                 throw new ArgumentException("enemyPosition not valid");
             }
             HashSet<Vector> s = new();
-            s.UnionWith(enemyPositions.Select(p => new Vector(new Position(0, 0), p, false))
-                .ToHashSet());
             s.UnionWith(CreateBasicMoveSet());
+            s.UnionWith(enemyPositions.Select(p => new Vector(new Position(0, 0), new Position(p.XPosition, p.YPosition), false))
+                .ToHashSet());
             return s;
         }
     }
