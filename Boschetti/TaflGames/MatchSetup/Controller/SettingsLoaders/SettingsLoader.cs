@@ -28,7 +28,17 @@ namespace SettingsLoaders
 
         public void LoadVariantModeConfig(ICellsCollectionBuilder cellsCollBuilder, IPiecesCollectionBuilder piecesCollBuilder)
         {
-            throw new NotImplementedException();
+            _settings = LoadSettingsFromFile(VariantModeConfigFile);
+            LoadBoardSize(cellsCollBuilder);
+            LoadKingAndThroneData(cellsCollBuilder, piecesCollBuilder);
+            LoadExitsData(cellsCollBuilder);
+            LoadSlidersData(cellsCollBuilder);
+            LoadClassicCellsData(cellsCollBuilder);
+            LoadBasicPiecesData(piecesCollBuilder);
+            LoadQueensData(piecesCollBuilder);
+            LoadArchersData(piecesCollBuilder);
+            LoadShieldsData(piecesCollBuilder);
+            LoadSwappersData(piecesCollBuilder);
         }
 
         private XElement LoadSettingsFromFile(string resourceName)
@@ -58,8 +68,12 @@ namespace SettingsLoaders
 
         private void LoadExitsData(ICellsCollectionBuilder cellsCollBuilder)
         {
-            ISet<IPosition> exitsPositions = GetPositionsByTagName("ExitsPositions");
-            cellsCollBuilder.AddExits(exitsPositions);
+            cellsCollBuilder.AddExits(GetPositionsByTagName("ExitsPositions"));
+        }
+
+        private void LoadSlidersData(ICellsCollectionBuilder cellsCollBuilder)
+        {
+            cellsCollBuilder.AddSliders(GetPositionsByTagName("SlidersPositions"));
         }
 
         private void LoadClassicCellsData(ICellsCollectionBuilder cellsCollBuilder) => cellsCollBuilder.AddClassicCells();
@@ -67,6 +81,26 @@ namespace SettingsLoaders
         private void LoadBasicPiecesData(IPiecesCollectionBuilder piecesCollBuilder)
         {
             piecesCollBuilder.AddBasicPieces(GetPiecesPositionsForEachTeam("BasicPieces"));
+        }
+
+        private void LoadQueensData(IPiecesCollectionBuilder piecesCollBuilder)
+        {
+            piecesCollBuilder.AddQueens(GetPiecesPositionsForEachTeam("Queens"));
+        }
+
+        private void LoadArchersData(IPiecesCollectionBuilder piecesCollBuilder)
+        {
+            piecesCollBuilder.AddArchers(GetPiecesPositionsForEachTeam("Archers"));
+        }
+
+        private void LoadShieldsData(IPiecesCollectionBuilder piecesCollBuilder)
+        {
+            piecesCollBuilder.AddShields(GetPiecesPositionsForEachTeam("Shields"));
+        }
+
+        private void LoadSwappersData(IPiecesCollectionBuilder piecesCollBuilder)
+        {
+            piecesCollBuilder.AddSwappers(GetPiecesPositionsForEachTeam("Swappers"));
         }
 
         private IDictionary<Player, ISet<IPosition>> GetPiecesPositionsForEachTeam(string piecesName)
