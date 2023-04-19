@@ -14,7 +14,7 @@ namespace SettingsLoaders
         private const string ClassicModeConfigFile = "MatchSetup.Resources.Config.ClassicModeSettings.xml";
         private const string VariantModeConfigFile = "MatchSetup.Resources.Config.VariantModeSettings.xml";
 
-        private XElement? _settings;
+        private XElement _settings;
 
         public void LoadClassicModeConfig(ICellsCollectionBuilder cellsCollBuilder, IPiecesCollectionBuilder piecesCollBuilder)
         {
@@ -43,27 +43,54 @@ namespace SettingsLoaders
 
         private XElement LoadSettingsFromFile(string resourceName)
         {
-            Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName);
-            StreamReader reader = new StreamReader(stream);
-            string xmlConfigFileText = reader.ReadToEnd();
-            return XElement.Parse(xmlConfigFileText);
+            try
+            {
+                Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName);
+                StreamReader reader = new StreamReader(stream);
+                string xmlConfigFileText = reader.ReadToEnd();
+                return XElement.Parse(xmlConfigFileText);
+            }
+            catch (Exception ex)
+            {
+                throw new IOException(
+                    "An error occurred while trying to get or parse the configuration file."
+                    + ex.Message
+                );
+            }
         }
 
         private void LoadBoardSize(ICellsCollectionBuilder cellsCollBuilder)
         {
-            int boardSize = Int32.Parse(_settings.Element("BoardSize").Value);
-            cellsCollBuilder.AddBoardSize(boardSize);
+            string tagName = "BoardSize";
+            string? boardSize = _settings.Element(tagName)?.Value;
+            if (boardSize is not null)
+            {
+                cellsCollBuilder.AddBoardSize(Int32.Parse(boardSize));
+            }
+            else
+            {
+                throw new IOException($"Error: data at tag {tagName} is not present");
+            }
         }
 
         private void LoadKingAndThroneData(ICellsCollectionBuilder cellsCollBuilder, IPiecesCollectionBuilder piecesCollBuilder)
         {
-            XElement kingPositionElement = _settings.Element("KingPosition").Element("Position");
-            IPosition kingPosition = new Position(
-                Int32.Parse(kingPositionElement.Attribute("row").Value),
-                Int32.Parse(kingPositionElement.Attribute("column").Value)
-            );
-            piecesCollBuilder.AddKing(kingPosition);
-            cellsCollBuilder.AddThrone(kingPosition);
+            string tagName = "KingPosition";
+            XElement? kingPositionElement = _settings.Element(tagName)?.Element("Position");
+            string? row = kingPositionElement?.Attribute("row")?.Value;
+            string? column = kingPositionElement?.Attribute("column")?.Value;
+            if (row is not null && column is not null)
+            {
+                IPosition kingPosition = new Position(Int32.Parse(row), Int32.Parse(column));
+                piecesCollBuilder.AddKing(kingPosition);
+                cellsCollBuilder.AddThrone(kingPosition);
+            }
+            else
+            {
+                throw new IOException(
+                    $"Error: data at tag {tagName} is not present or does not follow the correct format"
+                );
+            }
         }
 
         private void LoadExitsData(ICellsCollectionBuilder cellsCollBuilder)
@@ -115,16 +142,32 @@ namespace SettingsLoaders
         private ISet<IPosition> GetPositionsByTagName(string tagName)
         {
             ISet<IPosition> positions = new HashSet<IPosition>();
-            XElement positionsElement = _settings.Element(tagName);
-            foreach (XElement singlePosElement in positionsElement.Elements("Position"))
+            IEnumerable<XElement>? positionsElements = _settings.Element(tagName)?.Elements("Position");
+            if (positionsElements is not null)
             {
-                IPosition position = new Position(
-                    Int32.Parse(singlePosElement.Attribute("row").Value),
-                    Int32.Parse(singlePosElement.Attribute("column").Value)
-                );
-                positions.Add(position);
+                foreach (XElement? singlePosElement in positionsElements)
+                {
+                    string? row = singlePosElement?.Attribute("row")?.Value;
+                    string? column = singlePosElement?.Attribute("column")?.Value;
+                    if (row is not null && column is not null)
+                    {
+                        positions.Add(new Position(Int32.Parse(row), Int32.Parse(column)));
+                    }
+                    else
+                    {
+                        throw new IOException(
+                            $"Error: data at tag {tagName} is not present or does not follow the correct format"
+                        );
+                    }
+                }
+                return positions;
             }
-            return positions;
+            else
+            {
+                throw new IOException(
+                    $"Error: data at tag {tagName} is not present or does not follow the correct format"
+                );
+            }
         }
 
     }
