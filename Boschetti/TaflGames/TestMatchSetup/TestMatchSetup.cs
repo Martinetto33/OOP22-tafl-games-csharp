@@ -2,6 +2,8 @@ using MatchSetup.Common;
 using MatchSetup.Model.Builders;
 using NUnit.Framework.Internal;
 using MatchSetup.Controller.SettingsLoaders;
+using MatchSetup.Model.Cells;
+using MatchSetup.Model.Pieces;
 
 namespace TaflGames.TestMatchSetup
 {
@@ -35,8 +37,8 @@ namespace TaflGames.TestMatchSetup
                 Assert.Fail("Error: could not read configuration file. " + ex.ToString());
             }
 
-            var cells = _cellsCollBuilder.Build();
-            var pieces = _piecesCollBuilder.Build();
+            IDictionary<IPosition, ICell> cells = _cellsCollBuilder.Build();
+            IDictionary<Player, IDictionary<IPosition, IPiece>> pieces = _piecesCollBuilder.Build();
 
             // Check king and throne correct placement
             Assert.That(
@@ -148,8 +150,8 @@ namespace TaflGames.TestMatchSetup
                 Assert.Fail("Error: could not read configuration file. " + ex.ToString());
             }
 
-            var cells = _cellsCollBuilder.Build();
-            var pieces = _piecesCollBuilder.Build();
+            IDictionary<IPosition, ICell> cells = _cellsCollBuilder.Build();
+            IDictionary<Player, IDictionary<IPosition, IPiece>> pieces = _piecesCollBuilder.Build();
 
             // Check king and throne correct placement
             Assert.That(
