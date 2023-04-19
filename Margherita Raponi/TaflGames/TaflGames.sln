@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaflGames", "TaflGames\TaflGames.csproj", "{29652D9B-76D8-4338-A992-F171DFCEFDFD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{29652D9B-76D8-4338-A992-F171DFCEFDFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29652D9B-76D8-4338-A992-F171DFCEFDFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29652D9B-76D8-4338-A992-F171DFCEFDFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29652D9B-76D8-4338-A992-F171DFCEFDFD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2D2A026F-FD8F-4F78-B11C-064F9CE9A4B2}
+	EndGlobalSection
+EndGlobal
