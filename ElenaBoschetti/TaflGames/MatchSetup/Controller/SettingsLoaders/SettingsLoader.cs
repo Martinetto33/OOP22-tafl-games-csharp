@@ -2,6 +2,7 @@
 using MatchSetup.Common;
 using System.Reflection;
 using System.Xml.Linq;
+using Microsoft.Extensions.Logging;
 
 namespace MatchSetup.Controller.SettingsLoaders
 {
@@ -11,8 +12,11 @@ namespace MatchSetup.Controller.SettingsLoaders
     /// </summary>
     public class SettingsLoader : ISettingsLoader
     {
+
         private const string ClassicModeConfigFile = "MatchSetup.Resources.Config.ClassicModeSettings.xml";
         private const string VariantModeConfigFile = "MatchSetup.Resources.Config.VariantModeSettings.xml";
+
+        private readonly ILogger<SettingsLoader> _logger = new Logger<SettingsLoader>(new LoggerFactory());
 
         private XElement _settings;
 
@@ -20,7 +24,10 @@ namespace MatchSetup.Controller.SettingsLoaders
         {
             if (cellsCollBuilder is null || piecesCollBuilder is null)
             {
-                throw new ArgumentNullException("The builders passed as arguments cannot be null.");
+                string errorMsg = "The builders passed as arguments cannot be null.";
+                ArgumentNullException exception = new ArgumentNullException(errorMsg);
+                _logger.LogError(errorMsg, exception);
+                throw exception;
             }
             _settings = LoadSettingsFromFile(ClassicModeConfigFile);
             LoadBoardSize(cellsCollBuilder);
@@ -34,7 +41,10 @@ namespace MatchSetup.Controller.SettingsLoaders
         {
             if (cellsCollBuilder is null || piecesCollBuilder is null)
             {
-                throw new ArgumentNullException("The builders passed as arguments cannot be null.");
+                string errorMsg = "The builders passed as arguments cannot be null.";
+                ArgumentNullException exception = new ArgumentNullException(errorMsg);
+                _logger.LogError(errorMsg, exception);
+                throw exception;
             }
             _settings = LoadSettingsFromFile(VariantModeConfigFile);
             LoadBoardSize(cellsCollBuilder);
@@ -58,12 +68,11 @@ namespace MatchSetup.Controller.SettingsLoaders
                 string xmlConfigFileText = reader.ReadToEnd();
                 return XElement.Parse(xmlConfigFileText);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw new IOException(
-                    "An error occurred while trying to get or parse the configuration file."
-                    + ex.Message
-                );
+                string errorMsg = "An error occurred while trying to get or parse the configuration file.";
+                _logger.LogError(errorMsg, exception);
+                throw new IOException(errorMsg);
             }
         }
 
@@ -77,7 +86,10 @@ namespace MatchSetup.Controller.SettingsLoaders
             }
             else
             {
-                throw new IOException($"Error: data at tag {tagName} is not present");
+                string errorMsg = $"Error: data at tag {tagName} is not present";
+                IOException exception = new IOException(errorMsg);
+                _logger.LogError(errorMsg, exception);
+                throw exception;
             }
         }
 
@@ -95,9 +107,10 @@ namespace MatchSetup.Controller.SettingsLoaders
             }
             else
             {
-                throw new IOException(
-                    $"Error: data at tag {tagName} is not present or does not follow the correct format"
-                );
+                string errorMsg = $"Error: data at tag {tagName} is not present or does not follow the correct format";
+                IOException exception = new IOException(errorMsg);
+                _logger.LogError(errorMsg, exception);
+                throw exception;
             }
         }
 
@@ -163,18 +176,20 @@ namespace MatchSetup.Controller.SettingsLoaders
                     }
                     else
                     {
-                        throw new IOException(
-                            $"Error: data at tag {tagName} is not present or does not follow the correct format"
-                        );
+                        string errorMsg = $"Error: data at tag {tagName} is not present or does not follow the correct format";
+                        IOException exception = new IOException(errorMsg);
+                        _logger.LogError(errorMsg, exception);
+                        throw exception;
                     }
                 }
                 return positions;
             }
             else
             {
-                throw new IOException(
-                    $"Error: data at tag {tagName} is not present or does not follow the correct format"
-                );
+                string errorMsg = $"Error: data at tag {tagName} is not present or does not follow the correct format";
+                IOException exception = new IOException(errorMsg);
+                _logger.LogError(errorMsg, exception);
+                throw exception;
             }
         }
 

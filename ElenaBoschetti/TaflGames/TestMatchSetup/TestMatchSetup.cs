@@ -4,12 +4,15 @@ using NUnit.Framework.Internal;
 using MatchSetup.Controller.SettingsLoaders;
 using MatchSetup.Model.Cells;
 using MatchSetup.Model.Pieces;
+using Microsoft.Extensions.Logging;
 
-namespace TaflGames.TestMatchSetup
+namespace TestMatchSetup
 {
-    public class Tests
+    public class TestMatchSetup
     {
         private const int BoardSize = 11;
+
+        private readonly ILogger<TestMatchSetup> _logger = new Logger<TestMatchSetup>(new LoggerFactory());
 
         private ICellsCollectionBuilder _cellsCollBuilder;
         private IPiecesCollectionBuilder _piecesCollBuilder;
@@ -32,9 +35,11 @@ namespace TaflGames.TestMatchSetup
             {
                 loader.LoadClassicModeConfig(_cellsCollBuilder, _piecesCollBuilder);
             }
-            catch (IOException ex)
+            catch (IOException exception)
             {
-                Assert.Fail("Error: could not read configuration file. " + ex.ToString());
+                string errorMsg = "Error: could not read configuration file.";
+                _logger.LogError(errorMsg, exception);
+                Assert.Fail(errorMsg);
             }
 
             IDictionary<IPosition, ICell> cells = _cellsCollBuilder.Build();
@@ -145,9 +150,11 @@ namespace TaflGames.TestMatchSetup
             {
                 loader.LoadVariantModeConfig(_cellsCollBuilder, _piecesCollBuilder);
             }
-            catch (IOException ex)
+            catch (IOException exception)
             {
-                Assert.Fail("Error: could not read configuration file. " + ex.ToString());
+                string errorMsg = "Error: could not read configuration file.";
+                _logger.LogError(errorMsg, exception);
+                Assert.Fail(errorMsg);
             }
 
             IDictionary<IPosition, ICell> cells = _cellsCollBuilder.Build();
