@@ -2,8 +2,6 @@ using Common;
 using Builders;
 using NUnit.Framework.Internal;
 using SettingsLoaders;
-using Pieces;
-using System.Collections.Immutable;
 
 namespace TaflGames.TestMatchSetup
 {
@@ -61,6 +59,19 @@ namespace TaflGames.TestMatchSetup
                         new Position(10, 0),
                         new Position(10, 10)
                     }
+                )
+            );
+
+            // Check classic cells correct placement
+            Assert.That(
+                GetPositions(cells, typeof(Cells.ClassicCell)),
+                Is.EqualTo(
+                    GenerateAllPositions().AsQueryable()
+                        // filter out throne position
+                        .Where(pos => !pos.Equals(new Position(5, 5)))
+                        // filter out exits positions
+                        .Where(pos => !GetPositions(cells, typeof(Cells.Exit)).Contains(pos))
+                        .ToHashSet()
                 )
             );
 
@@ -129,6 +140,15 @@ namespace TaflGames.TestMatchSetup
                     // get the positions of objects that are instances of the target class
                     .Select(entry => entry.Key)
                     .ToHashSet();
+        }
+
+        private ISet<IPosition> GenerateAllPositions()
+        {
+            return Enumerable.Range(0, BoardSize)
+                    .Select(row => Enumerable.Range(0, BoardSize)
+                                    .Select(col => new Position(row, col))
+                                    .ToHashSet())
+                    .Aggregate(new HashSet<IPosition>(), (set, subset) => set.Concat(subset).ToHashSet());
         }
     }
 }
