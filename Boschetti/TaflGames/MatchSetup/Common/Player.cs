@@ -1,4 +1,4 @@
-﻿namespace Common
+﻿namespace MatchSetup.Common
 {
     /// <summary>
     /// Represents the role of the player during the match.

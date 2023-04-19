@@ -1,4 +1,4 @@
-﻿namespace Common
+﻿namespace MatchSetup.Common
 {
     /// <summary>
     /// This class models a position on the board.

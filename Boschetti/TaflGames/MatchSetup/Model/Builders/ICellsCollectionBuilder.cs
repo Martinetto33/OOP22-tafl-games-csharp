@@ -1,7 +1,7 @@
-﻿using Cells;
-using Common;
+﻿using MatchSetup.Model.Cells;
+using MatchSetup.Common;
 
-namespace Builders
+namespace MatchSetup.Model.Builders
 {
     /// <summary>
     /// This interface allows to intercat with a builder that creates

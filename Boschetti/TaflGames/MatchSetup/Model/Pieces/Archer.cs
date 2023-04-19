@@ -1,4 +1,4 @@
-﻿namespace Pieces
+﻿namespace MatchSetup.Model.Pieces
 {
     /// <summary>
     /// This class models an archer piece.

@@ -1,7 +1,7 @@
-using Common;
-using Builders;
+using MatchSetup.Common;
+using MatchSetup.Model.Builders;
 using NUnit.Framework.Internal;
-using SettingsLoaders;
+using MatchSetup.Controller.SettingsLoaders;
 
 namespace TaflGames.TestMatchSetup
 {
@@ -41,16 +41,16 @@ namespace TaflGames.TestMatchSetup
             // Check king and throne correct placement
             Assert.That(
                 pieces[Player.Defender][new Position(5, 5)].GetType(),
-                Is.EqualTo(typeof(Pieces.King))
+                Is.EqualTo(typeof(MatchSetup.Model.Pieces.King))
             );
             Assert.That(
                 cells[new Position(5, 5)].GetType(),
-                Is.EqualTo(typeof(Cells.Throne))
+                Is.EqualTo(typeof(MatchSetup.Model.Cells.Throne))
             );
 
             // Check exits correct placement
             Assert.That(
-                GetPositions(cells, typeof(Cells.Exit)),
+                GetPositions(cells, typeof(MatchSetup.Model.Cells.Exit)),
                 Is.EqualTo(
                     new HashSet<IPosition>()
                     {
@@ -64,20 +64,20 @@ namespace TaflGames.TestMatchSetup
 
             // Check classic cells correct placement
             Assert.That(
-                GetPositions(cells, typeof(Cells.ClassicCell)),
+                GetPositions(cells, typeof(MatchSetup.Model.Cells.ClassicCell)),
                 Is.EqualTo(
                     GenerateAllPositions().AsQueryable()
                         // filter out throne position
                         .Where(pos => !pos.Equals(new Position(5, 5)))
                         // filter out exits positions
-                        .Where(pos => !GetPositions(cells, typeof(Cells.Exit)).Contains(pos))
+                        .Where(pos => !GetPositions(cells, typeof(MatchSetup.Model.Cells.Exit)).Contains(pos))
                         .ToHashSet()
                 )
             );
 
             // Check attacker basic pieces correct placement
             Assert.That(
-                GetPositions(pieces[Player.Attacker], typeof(Pieces.BasicPiece)),
+                GetPositions(pieces[Player.Attacker], typeof(MatchSetup.Model.Pieces.BasicPiece)),
                 Is.EqualTo(
                     new HashSet<IPosition>()
                     {
@@ -111,7 +111,7 @@ namespace TaflGames.TestMatchSetup
 
             // Check defender basic pieces correct placement
             Assert.That(
-                GetPositions(pieces[Player.Defender], typeof(Pieces.BasicPiece)),
+                GetPositions(pieces[Player.Defender], typeof(MatchSetup.Model.Pieces.BasicPiece)),
                 Is.EqualTo(
                     new HashSet<IPosition>()
                     {
@@ -154,16 +154,16 @@ namespace TaflGames.TestMatchSetup
             // Check king and throne correct placement
             Assert.That(
                 pieces[Player.Defender][new Position(5, 5)].GetType(),
-                Is.EqualTo(typeof(Pieces.King))
+                Is.EqualTo(typeof(MatchSetup.Model.Pieces.King))
             );
             Assert.That(
                 cells[new Position(5, 5)].GetType(),
-                Is.EqualTo(typeof(Cells.Throne))
+                Is.EqualTo(typeof(MatchSetup.Model.Cells.Throne))
             );
 
             // Check exits correct placement
             Assert.That(
-                GetPositions(cells, typeof(Cells.Exit)),
+                GetPositions(cells, typeof(MatchSetup.Model.Cells.Exit)),
                 Is.EqualTo(
                     new HashSet<IPosition>()
                     {
@@ -177,7 +177,7 @@ namespace TaflGames.TestMatchSetup
 
             // Check sliders correct placement
             Assert.That(
-                GetPositions(cells, typeof(Cells.Slider)),
+                GetPositions(cells, typeof(MatchSetup.Model.Cells.Slider)),
                 Is.EqualTo(
                     new HashSet<IPosition>()
                     {
@@ -191,22 +191,22 @@ namespace TaflGames.TestMatchSetup
 
             // Check classic cells correct placement
             Assert.That(
-                GetPositions(cells, typeof(Cells.ClassicCell)),
+                GetPositions(cells, typeof(MatchSetup.Model.Cells.ClassicCell)),
                 Is.EqualTo(
                     GenerateAllPositions().AsQueryable()
                         // filter out throne position
                         .Where(pos => !pos.Equals(new Position(5, 5)))
                         // filter out exits positions
-                        .Where(pos => !GetPositions(cells, typeof(Cells.Exit)).Contains(pos))
+                        .Where(pos => !GetPositions(cells, typeof(MatchSetup.Model.Cells.Exit)).Contains(pos))
                         // filter out sliders positions
-                        .Where(pos => !GetPositions(cells, typeof(Cells.Slider)).Contains(pos))
+                        .Where(pos => !GetPositions(cells, typeof(MatchSetup.Model.Cells.Slider)).Contains(pos))
                         .ToHashSet()
                 )
             );
 
             // Check queens correct placement
             Assert.That(
-                GetPositions(pieces[Player.Attacker], typeof(Pieces.Queen)),
+                GetPositions(pieces[Player.Attacker], typeof(MatchSetup.Model.Pieces.Queen)),
                 Is.EqualTo(
                     new HashSet<IPosition>()
                     {
@@ -215,7 +215,7 @@ namespace TaflGames.TestMatchSetup
                 )
             );
             Assert.That(
-                GetPositions(pieces[Player.Defender], typeof(Pieces.Queen)),
+                GetPositions(pieces[Player.Defender], typeof(MatchSetup.Model.Pieces.Queen)),
                 Is.EqualTo(
                     new HashSet<IPosition>()
                     {
@@ -226,7 +226,7 @@ namespace TaflGames.TestMatchSetup
 
             // Check archers correct placement
             Assert.That(
-                GetPositions(pieces[Player.Attacker], typeof(Pieces.Archer)),
+                GetPositions(pieces[Player.Attacker], typeof(MatchSetup.Model.Pieces.Archer)),
                 Is.EqualTo(
                     new HashSet<IPosition>()
                     {
@@ -236,7 +236,7 @@ namespace TaflGames.TestMatchSetup
                 )
             );
             Assert.That(
-                GetPositions(pieces[Player.Defender], typeof(Pieces.Archer)),
+                GetPositions(pieces[Player.Defender], typeof(MatchSetup.Model.Pieces.Archer)),
                 Is.EqualTo(
                     new HashSet<IPosition>()
                     {
@@ -248,7 +248,7 @@ namespace TaflGames.TestMatchSetup
 
             // Check shields correct placement
             Assert.That(
-                GetPositions(pieces[Player.Attacker], typeof(Pieces.Shield)),
+                GetPositions(pieces[Player.Attacker], typeof(MatchSetup.Model.Pieces.Shield)),
                 Is.EqualTo(
                     new HashSet<IPosition>()
                     {
@@ -258,7 +258,7 @@ namespace TaflGames.TestMatchSetup
                 )
             );
             Assert.That(
-                GetPositions(pieces[Player.Defender], typeof(Pieces.Shield)),
+                GetPositions(pieces[Player.Defender], typeof(MatchSetup.Model.Pieces.Shield)),
                 Is.EqualTo(
                     new HashSet<IPosition>()
                     {
@@ -270,7 +270,7 @@ namespace TaflGames.TestMatchSetup
 
             // Check swappers correct placement
             Assert.That(
-                GetPositions(pieces[Player.Attacker], typeof(Pieces.Swapper)),
+                GetPositions(pieces[Player.Attacker], typeof(MatchSetup.Model.Pieces.Swapper)),
                 Is.EqualTo(
                     new HashSet<IPosition>()
                     {
@@ -279,7 +279,7 @@ namespace TaflGames.TestMatchSetup
                 )
             );
             Assert.That(
-                GetPositions(pieces[Player.Defender], typeof(Pieces.Swapper)),
+                GetPositions(pieces[Player.Defender], typeof(MatchSetup.Model.Pieces.Swapper)),
                 Is.EqualTo(
                     new HashSet<IPosition>()
                     {
@@ -290,7 +290,7 @@ namespace TaflGames.TestMatchSetup
 
             // Check attacker basic pieces correct placement
             Assert.That(
-                GetPositions(pieces[Player.Attacker], typeof(Pieces.BasicPiece)),
+                GetPositions(pieces[Player.Attacker], typeof(MatchSetup.Model.Pieces.BasicPiece)),
                 Is.EqualTo(
                     new HashSet<IPosition>()
                     {
@@ -318,7 +318,7 @@ namespace TaflGames.TestMatchSetup
 
             // Check defender basic pieces correct placement
             Assert.That(
-                GetPositions(pieces[Player.Defender], typeof(Pieces.BasicPiece)),
+                GetPositions(pieces[Player.Defender], typeof(MatchSetup.Model.Pieces.BasicPiece)),
                 Is.EqualTo(
                     new HashSet<IPosition>()
                     {

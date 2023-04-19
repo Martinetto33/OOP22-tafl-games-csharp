@@ -1,6 +1,6 @@
-﻿using Builders;
+﻿using MatchSetup.Model.Builders;
 
-namespace SettingsLoaders
+namespace MatchSetup.Controller.SettingsLoaders
 {
     /// <summary>
     /// This interface allows to load the configuration settings for the setup of the board

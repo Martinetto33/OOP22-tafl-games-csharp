@@ -1,7 +1,7 @@
-﻿using Common;
-using Pieces;
+﻿using MatchSetup.Common;
+using MatchSetup.Model.Pieces;
 
-namespace Builders
+namespace MatchSetup.Model.Builders
 {
     /// <summary>
     /// This class implements a builder to create a collection of pieces.

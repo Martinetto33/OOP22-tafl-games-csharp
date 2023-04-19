@@ -1,4 +1,4 @@
-﻿namespace Cells
+﻿namespace MatchSetup.Model.Cells
 {
     /// <summary>
     /// This class models a throne cell.

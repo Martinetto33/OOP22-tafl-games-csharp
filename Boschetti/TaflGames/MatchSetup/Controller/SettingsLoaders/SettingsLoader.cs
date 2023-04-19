@@ -1,9 +1,9 @@
-﻿using Builders;
-using Common;
+﻿using MatchSetup.Model.Builders;
+using MatchSetup.Common;
 using System.Reflection;
 using System.Xml.Linq;
 
-namespace SettingsLoaders
+namespace MatchSetup.Controller.SettingsLoaders
 {
     /// <summary>
     /// This class loads the settings for the setup of the board for each game mode

@@ -1,4 +1,4 @@
-﻿namespace Common
+﻿namespace MatchSetup.Common
 {
     /// <summary>
     /// This interface represents a couple of coordinates on the board.
